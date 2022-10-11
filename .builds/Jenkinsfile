@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Upload') {
             steps {
-                archiveArtifactsToQiniu allowEmptyArchive: false, caseSensitive: false, excludeFilesGlob: '', includeFilesGlob: 'dist/cms/**/*', onlyIfSuccessful: true, useDefaultExcludes: false, objectNamePrefix: 'ufe/cloud/assets/', deleteFilePathPrefix: 'dist/cms/cdn-assets/'
+                archiveArtifactsToQiniu allowEmptyArchive: false, caseSensitive: false, excludeFilesGlob: '', includeFilesGlob: 'dist/cms/cdn-assets/**/*', onlyIfSuccessful: true, useDefaultExcludes: false, objectNamePrefix: 'ufe/cloud/assets/', deleteFilePathPrefix: 'dist/cms/cdn-assets/'
             }
         }
     }
