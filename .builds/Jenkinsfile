@@ -21,7 +21,7 @@ pipeline {
         stage('Upload') {
           steps {
             sh 'pwd'
-            archiveArtifactsToQiniu allowEmptyArchive: false, caseSensitive: false, excludeFilesGlob: '', includeFilesGlob: 'cdn-upload/**/*', onlyIfSuccessful: true, useDefaultExcludes: false, objectNamePrefix: 'ssss/', deleteFilePathPrefix: 'cdn-upload/'
+            archiveArtifactsToQiniu allowEmptyArchive: false, caseSensitive: false, excludeFilesGlob: '', includeFilesGlob: 'cdn-upload/**/*', onlyIfSuccessful: true, useDefaultExcludes: false, objectNamePrefix: 'cloud/assets/', deleteFilePathPrefix: 'cdn-upload/'
           }
         }
     }
