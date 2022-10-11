@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    environment {
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+        ORIGIN_WORKSPACE = pwd()
+        SERVICE_NAME = "fe-cloud-cms"
+        PROJECT_NAME = "course-cms" // 名称显示在镜像名称
+        PROJECT_PATH = "./"
+        ENV_NAME = 'dev'
+        JELLYFISH_BRANCH = 'birdflock'
+    }
+
+    stages {
+        stage('Branch') {
+            steps {
+                sh 'git checkout ${BRANCH_NAME}'
+                sh 'git pull'
+            }
+        }
+        stage('Upload') {
+          steps {
+            sh 'pwd'
+            archiveArtifactsToQiniu allowEmptyArchive: false, caseSensitive: false, excludeFilesGlob: '', includeFilesGlob: 'cdn-upload/**/*', onlyIfSuccessful: true, useDefaultExcludes: false
+          }
+        }
+    }
+
+    post {
+        success {
+            echo 'I successed! Push new tag.'
+        }
+        failure {
+            echo 'I failed :(. Reset git head.'
+        }
+    }
+}
+
